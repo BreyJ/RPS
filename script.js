@@ -26,15 +26,3 @@ function defWinner () {
 console.log ("Player chooses " + playerChoice)
 console.log ("Computer chooses " + machineChoice())
 console.log (defWinner())
-
-
-
-
-
-
-
-// Define an array with elements 0, 1, and 2
-// Use Math.random() to generate a random index within the array length
-// Get the randomly selected number from the array
-// Show the selected number
-// You can return the selected number if needed
