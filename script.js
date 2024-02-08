@@ -1,28 +1,49 @@
-const choices = ["rock", "paper", "scissors"];
+const options = ["rock", "paper", "scissors"];
+let rounds = 0;
+let score = {
+  defeats: 0,
+  ties: 0,
+  victories: 0
+}
 
-let playerChoice = prompt ("Rock, Paper or Scissors?");
-playerChoice = playerChoice.toLowerCase();
-
-function machineChoice () {
-  let defChoice = Math.floor(Math.random()*choices.length)
-  return choices[defChoice]
+function playRound() {
+  let playerChoice = prompt("Rock, Paper, Scissors!").toLowerCase();
+  let machineChoice = Math.floor(Math.random()*options.length);
+  let computerChoice = options[machineChoice];
+  
+  console.log("Player Chooses " + playerChoice);
+  console.log("Computer Choses " + computerChoice);
+  
+  function winner() {
+    if (playerChoice === computerChoice) {
+      score.ties++;
+      return "Tie!";
+    }
+    else if (
+      (playerChoice === "rock" && computerChoice === "scissors") ||
+      (playerChoice === "paper" && computerChoice === "rock") ||
+      (playerChoice === "scissors" && computerChoice === "paper")
+    ) {
+      score.victories++
+      return "Player wins this round!"
+    }
+    else {
+      score.defeats++
+      return "Computer wins this round!"}
+  };
+  console.log(winner())
+  console.log("Defeats: " + score.defeats + " Ties: " + score.ties + " Victories: " + score.victories)
+  rounds++;
 };
 
-function defWinner () {
-  let computerChoice = machineChoice();
-
-  if (playerChoice === computerChoice) {
-    return "Tie";
-  }
-  else if (
-    (playerChoice === "rock" && computerChoice === "scissors") ||
-    (playerChoice === "paper" && computerChoice === "rock") ||
-    (playerChoice === "scissors" && computerChoice === "paper")
-  ) { 
-    return "Player wins."
-  }
-  else {return "Computer wins."}
+while (rounds < 5) {
+  playRound()
+};
+if (score.defeats === score.victories) {
+  console.log("It's a tie! DEATHMACH!")
+  playRound()
 }
-console.log ("Player chooses " + playerChoice)
-console.log ("Computer chooses " + machineChoice())
-console.log (defWinner())
+else if (score.defeats > score.victories) {
+  console.log("You loose. :-( ")
+}
+else {console.log("YOU WIN!!!")}
